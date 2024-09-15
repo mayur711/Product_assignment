@@ -1,0 +1,22 @@
+{
+  "name": "prod-mngt-ms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^8.10.0",
+    "ajv-errors": "^3.0.0",
+    "aws-param-store": "^3.2.0",
+    "logger": "0.0.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.11.2",
+    "sequelize": "^6.37.3",
+    "serverless-offline": "^13.8.0"
+  }
+}

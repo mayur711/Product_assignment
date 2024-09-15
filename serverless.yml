@@ -1,0 +1,66 @@
+service: prod-mngt-ms
+# custom:
+#     secrets: ${file(secrets.json)}
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  timeout: 30
+  stage: ${opt:stage,'dev'}
+  region: us-west-2
+  environment:
+    DB_NAME: /${self:provider.stage}/dbName
+    DB_USER: /${self:provider.stage}/dbUser
+    DB_PASSWORD: /${self:provider.stage}/dbPassword
+    DB_HOST: /${self:provider.stage}/dbHost
+    DB_PORT: /${self:provider.stage}/dbPort
+    region: ${self:provider.region}
+
+functions:
+  registerProduct:
+    handler: src/handler/registerProductHandler.handle
+    description: "This is to register new Product in our application"
+    events:
+      - http:
+          path: products
+          method: post
+          cors: true
+
+  listProduct:
+    handler: src/handler/listProductHandler.handle
+    description: "This is to list all Products in our application"
+    events:
+      - http:
+          path: products
+          method: get
+          cors: true
+
+  getProduct:
+    handler: src/handler/getProductHandler.handle
+    description: "This is to get Product by its ID in our application"
+    events:
+      - http:
+          path: products/{productId}
+          method: get
+          cors: true
+
+  deleteProduct:
+    handler: src/handler/deleteProductHandler.handle
+    description: "This is to remove Product from our application"
+    events:
+      - http:
+          path: products/{productId}
+          method: delete
+          cors: true
+
+  updateProduct:
+    handler: src/handler/updateProductHandler.handle
+    description: "This is to update any Product details in our application"
+    events:
+      - http:
+          path: products
+          method: put
+          cors: true
